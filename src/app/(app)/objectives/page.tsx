@@ -7,8 +7,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
 import { ObjectivesHeader } from "@/components/objectives/ObjectivesHeader";
 import { ObjectiveCreator } from "@/components/objectives/ObjectiveCreator";
-import { PersonalObjectivesTab } from "@/components/objectives/PersonalObjectivesTab";
-import { TeamObjectivesTab } from "@/components/objectives/TeamObjectivesTab";
 import { useObjectives } from "@/hooks/useObjectives";
 import { useTeams } from "@/hooks/useTeams";
 import { useAuth } from "@/hooks/use-auth";
@@ -30,7 +28,6 @@ const ObjectivesPage = () => {
 
   const {
     teams,
-    userProfile,
     isLoading: teamsLoading,
   } = useTeams();
 

@@ -49,7 +49,7 @@ const ReportsPage = () => {
       await fetchObjectives(null);
     };
     load();
-  }, []);
+  }, [fetchTeams, fetchObjectives]);
 
   const isPersonal = reportType === "personal";
 

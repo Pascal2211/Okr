@@ -98,7 +98,6 @@ export default function ObjectiveDetailPage() {
   const { id } = useParams();
   const [objective, setObjective] = useState<Objective | null>(null);
   const [loading, setLoading] = useState(true);
-  const user = auth.currentUser;
 
   useEffect(() => {
     const fetchObjective = async () => {
@@ -112,15 +111,6 @@ export default function ObjectiveDetailPage() {
 
     fetchObjective();
   }, [id]);
-
-  const handleEdit = async (updates: Partial<Objective>) => {
-    if (!id) return;
-    const ref = doc(db, "objectives", id as string);
-    await updateDoc(ref, {
-      ...updates,
-      updated_at: new Date().toISOString(),
-    });
-  };
 
   if (loading || !objective) {
     return <div className="p-8 text-white">Loading...</div>;
