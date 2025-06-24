@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
 import { ObjectivesHeader } from "@/components/objectives/ObjectivesHeader";
@@ -16,6 +16,9 @@ import { TeamObjectivesList } from "@/components/objectives/TeamObjectivesList";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ValuesObjectiveCard } from "@/components/objectives/ValuesObjectiveCard";
 import Link from "next/link";
+import { StandardObjectiveCard } from "@/components/objectives/StandardObjectiveCard";
+import { KeyResultsObjectiveCard } from "@/components/objectives/KeyResultsObjectiveCard";
+import { Objective } from "@/types/objectives";
 
 const ObjectivesPage = () => {
   const {
@@ -32,7 +35,6 @@ const ObjectivesPage = () => {
   } = useTeams();
 
   const { user } = useAuth();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>("personal");
   const [initialFetchDone, setInitialFetchDone] = useState(false);
@@ -141,41 +143,41 @@ const ObjectivesPage = () => {
     }
   };
 
-  const getFilteredObjectives = () => {
-    let filtered = objectives;
+  // const getFilteredObjectives = () => {
+  //   let filtered = objectives;
 
-    if (activeTab === "personal" && user) {
-      filtered = filtered.filter(
-        (obj) => obj.personalObjective === true && obj.user_id === user.uid
-      );
-    } else if (activeTab === "teams") {
-      filtered = filtered.filter((obj) => obj.personalObjective === false);
-    }
+  //   if (activeTab === "personal" && user) {
+  //     filtered = filtered.filter(
+  //       (obj) => obj.personalObjective === true && obj.user_id === user.uid
+  //     );
+  //   } else if (activeTab === "teams") {
+  //     filtered = filtered.filter((obj) => obj.personalObjective === false);
+  //   }
 
-    if (statusFilter) {
-      if (statusFilter === "active") {
-        filtered = filtered.filter((obj) => obj.status !== "completed");
-      } else if (statusFilter === "completed") {
-        filtered = filtered.filter((obj) => obj.status === "completed");
-      }
-    }
+  //   if (statusFilter) {
+  //     if (statusFilter === "active") {
+  //       filtered = filtered.filter((obj) => obj.status !== "completed");
+  //     } else if (statusFilter === "completed") {
+  //       filtered = filtered.filter((obj) => obj.status === "completed");
+  //     }
+  //   }
 
-    return filtered;
-  };
+  //   return filtered;
+  // };
 
   const isLoading = objectivesLoading || teamsLoading;
 
-  const renderObjectiveByType = (objective: Objective) => {
-    switch(objective.type) {
-      case "standard":
-        console.log("Rendering StandardObjectiveCard");
-        return <StandardObjectiveCard objective={objective} />;
-      case "key_results":
-        console.log("Rendering KeyResultsObjectiveCard");
-        return <KeyResultsObjectiveCard objective={objective} />;
-      // ...
-    }
-  };
+  // const renderObjectiveByType = (objective: Objective) => {
+  //   switch(objective.type) {
+  //     case "standard":
+  //       console.log("Rendering StandardObjectiveCard");
+  //       return <StandardObjectiveCard objective={objective} />;
+  //     case "key_results":
+  //       console.log("Rendering KeyResultsObjectiveCard");
+  //       return <KeyResultsObjectiveCard objective={objective} />;
+  //     // ...
+  //   }
+  // };
 
   return (
     <ObjectiveProvider activeTab={activeTab} selectedTeam={selectedTeam}>

@@ -13,11 +13,9 @@ import { JoinTeamForm } from "@/components/team/JoinTeamForm";
 import { TeamDetailCard } from "@/components/team/TeamDetailCard";
 import { TeamProvider } from "@/contexts/teamContext";
 import TitleInvitationCodeCard from "@/components/team/TitleInvitationCodeCard";
-import { usePersonalObjectiveActivity } from "@/hooks/usePersonalObjectiveActivity";
 
 const TeamContent = () => {
-  const { currentTeam, isLoading, teamMembers } = useTeam();
-  const activities = usePersonalObjectiveActivity();
+  const { currentTeam, isLoading } = useTeam();
 
   if (isLoading) {
     return (

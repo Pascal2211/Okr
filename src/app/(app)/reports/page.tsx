@@ -3,13 +3,6 @@
 import { useState, useEffect } from "react";
 import { useObjectives } from "@/hooks/useObjectives";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
 import {
   Loader2,
@@ -32,9 +25,7 @@ const ReportsPage = () => {
   const {
     isLoading,
     objectives,
-    teams,
     fetchObjectives,
-    fetchTeams,
     selectedTeam,
     setSelectedTeam,
   } = useObjectives();
@@ -45,11 +36,10 @@ const ReportsPage = () => {
 
   useEffect(() => {
     const load = async () => {
-      await fetchTeams();
       await fetchObjectives(null);
     };
     load();
-  }, [fetchTeams, fetchObjectives]);
+  }, [fetchObjectives]);
 
   const isPersonal = reportType === "personal";
 
@@ -133,27 +123,6 @@ const ReportsPage = () => {
                 <Users className="w-4 h-4 mr-2" /> Team
               </button>
             </div>
-
-            {reportType === "company" && teams.length > 0 && (
-              <Select
-                value={selectedTeam || undefined}
-                onValueChange={(value) => {
-                  setSelectedTeam(value);
-                  fetchObjectives(value);
-                }}
-              >
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Select team" />
-                </SelectTrigger>
-                <SelectContent>
-                  {teams.map((team) => (
-                    <SelectItem key={team.id} value={team.id}>
-                      {team.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
@@ -221,7 +190,7 @@ const ReportsPage = () => {
                 {["daily", "weekly", "monthly"].map((tf) => (
                   <button
                     key={tf}
-                    onClick={() => setTimeFrame(tf as any)}
+                    onClick={() => setTimeFrame(tf as unknown as "daily" | "weekly" | "monthly")}
                     className={`px-3 py-1 text-xs rounded-md ${
                       timeFrame === tf ? "bg-primary text-white" : "bg-muted"
                     }`}

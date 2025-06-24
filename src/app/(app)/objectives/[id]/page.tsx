@@ -2,20 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { auth, db } from "@/integrations/firebase/firebase";
+import { db } from "@/integrations/firebase/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Target } from "lucide-react";
-import { KeyResult, KeyResult as KeyResultType, Objective } from "@/types/objectives";
+import { KeyResult, Objective } from "@/types/objectives";
 import MetaInfoGrid from "@/components/MetaInfoGrid";
 
 interface KeyResultCardProps {
-  keyResult: KeyResultType & { objectiveId: string };
+  keyResult: KeyResult & { objectiveId: string };
 }
 
 const KeyResultCard = ({ keyResult }: KeyResultCardProps) => {
-  const [current, setCurrent] = useState(keyResult.current);
+  const [current, setCurrent] = useState<number | null>(keyResult.current);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -29,13 +29,11 @@ const KeyResultCard = ({ keyResult }: KeyResultCardProps) => {
     setSaving(true);
     setSuccess(false);
     try {
-      // Update the key result in the parent objective
       const ref = doc(db, "objectives", keyResult.objectiveId);
-      // Fetch the latest objective
       const snapshot = await getDoc(ref);
       if (!snapshot.exists()) return;
       const data = snapshot.data();
-      const updatedKeyResults = (data.key_results || []).map((kr: any) =>
+      const updatedKeyResults = (data.key_results || []).map((kr: KeyResult) =>
         kr.id === keyResult.id ? { ...kr, current } : kr
       );
       await updateDoc(ref, { key_results: updatedKeyResults, updated_at: new Date().toISOString() });
@@ -50,7 +48,7 @@ const KeyResultCard = ({ keyResult }: KeyResultCardProps) => {
     <Card className="w-full px-4 py-4 bg-white shadow-md rounded-xl border border-gray-200">
       <CardHeader>
         <CardTitle className="text-lg font-semibold text-black">
-          {keyResult.keyResult}
+          {keyResult.title}
         </CardTitle>
       </CardHeader>
       <CardContent className="text-sm text-muted-foreground space-y-2">
@@ -58,7 +56,7 @@ const KeyResultCard = ({ keyResult }: KeyResultCardProps) => {
           <p><span className="font-medium text-black">Explanation:</span> {keyResult.explanation}</p>
           <p><strong className="text-black">Owner:</strong> {keyResult.owner}</p>
         </div>
-            <p className="mt-2"><strong>Comment:</strong> {keyResult.comment}</p>
+        <p className="mt-2"><strong>Comment:</strong> {keyResult.comment}</p>
         <div className="flex flex-col gap-2 mt-2">
           <div className="flex flex-wrap justify-between items-center gap-4">
             <p><strong>Baseline:</strong> {keyResult.baseline}</p>
@@ -108,7 +106,6 @@ export default function ObjectiveDetailPage() {
       }
       setLoading(false);
     };
-
     fetchObjective();
   }, [id]);
 
@@ -179,8 +176,6 @@ export default function ObjectiveDetailPage() {
   return (
     <div className="w-full max-w-screen-2xl mx-auto py-10 space-y-6">
       {metaAndTitleSection}
-      
-
       {/* Key Results */}
       <div className="flex items-center gap-2 text-gray-900 mb-2">
         <h1 className="text-2xl sm:text-3xl font-bold text-white p-2">Key Results
