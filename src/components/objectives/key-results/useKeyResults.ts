@@ -13,7 +13,7 @@ export const useKeyResults = (initialKeyResults: KeyResult[] = []) => {
     setKeyResults(keyResults.filter((kr) => kr.id !== id));
   };
 
-  const handleKeyResultChange = (id: string, field: keyof KeyResult, value: any) => {
+  const handleKeyResultChange = (id: string, field: keyof KeyResult, value: unknown) => {
     setKeyResults(
       keyResults.map((kr) =>
         kr.id === id ? { ...kr, [field]: value } : kr

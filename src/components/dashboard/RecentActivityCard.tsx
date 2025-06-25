@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { auth } from "@/integrations/firebase/firebase";
+
 
 
 import { usePersonalObjectiveActivity } from "@/hooks/usePersonalObjectiveActivity";

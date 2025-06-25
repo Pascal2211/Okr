@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 interface KeyResultItemProps {
   keyResult: KeyResult;
   onRemove: (id: string) => void;
-  onChange: (id: string, field: keyof KeyResult, value: any) => void;
+  onChange: (id: string, field: keyof KeyResult, value: unknown) => void;
   teamMembers?: { id: string; full_name: string }[];
 }
 

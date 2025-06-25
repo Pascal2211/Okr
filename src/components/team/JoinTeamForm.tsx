@@ -26,7 +26,7 @@ export const JoinTeamForm = () => {
       await joinTeam(teamCode);
       setTeamCode("");
       setShowForm(false);
-    } catch (error) {
+    } catch {
       setIsInvalidCode(true);
     } finally {
       setIsJoining(false);

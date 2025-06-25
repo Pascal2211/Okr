@@ -1,4 +1,4 @@
-import { Objective, KeyResult } from "@/types/objectives";
+import { Objective } from "@/types/objectives";
 
 const calculateSimpleProgress = (current: number, target: number, baseline: number = 0): number => {
   if (target === baseline) {

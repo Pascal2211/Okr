@@ -72,7 +72,7 @@ export const ObjectiveFormDialog = ({
   selectedTeam,
   setSelectedTeam
 }: ObjectiveFormDialogProps) => {
-  const { teamMembers, currentUserFullName, setCurrentUserFullName } = useTeamMembers(selectedTeam);
+  const { teamMembers, currentUserFullName } = useTeamMembers(selectedTeam);
 
   // Set owner to current user by default if empty
   useEffect(() => {

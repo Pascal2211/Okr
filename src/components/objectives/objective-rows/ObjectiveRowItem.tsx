@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 interface ObjectiveRowItemProps {
   row: ObjectiveRow;
   onRemove: (id: string) => void;
-  onChange: (id: string, field: keyof ObjectiveRow, value: any) => void;
+  onChange: (id: string, field: keyof ObjectiveRow, value: unknown) => void;
   teamMembers?: { id: string; full_name: string }[];
 }
 

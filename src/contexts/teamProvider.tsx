@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useEffect, ReactNode } from "react";
 import { onSnapshot, doc } from "firebase/firestore";
 import { auth, db } from "@/integrations/firebase/firebase";
 import { useTeamOperations } from "@/hooks/team/useTeamOperations";

@@ -3,7 +3,7 @@
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { db } from "@/integrations/firebase/firebase";
 
-export async function getDashboardData(userId: string) {
+export async function getDashboardData() {
   try {
     // Example query: Fetch objectives where owner is the user
     const q = teamId

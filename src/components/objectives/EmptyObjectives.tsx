@@ -33,7 +33,7 @@ export const EmptyObjectives = ({ type, onCreateClick, onJoinTeamClick }: EmptyO
     <Card>
       <CardContent className="flex flex-col items-center justify-center p-6">
         <Target className="h-12 w-12 text-muted-foreground mb-4" />
-        <h3 className="text-xl font-medium text-center">You're not in any teams yet</h3>
+        <h3 className="text-xl font-medium text-center">You are not in any teams yet</h3>
         <p className="text-muted-foreground text-center mt-2">
           Join a team to see team objectives
         </p>

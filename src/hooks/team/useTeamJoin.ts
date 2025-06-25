@@ -9,7 +9,6 @@ import {
   where,
   updateDoc,
   doc,
-  getDoc,
   arrayUnion,
 } from "firebase/firestore";
 
@@ -95,11 +94,11 @@ export const useTeamJoin = (
         title: "Success",
         description: `Joined team '${teamData.name}' successfully`,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error joining team:", error);
       toast({
         title: "Error",
-        description: error.message || "Failed to join team",
+        description: "Failed to join team",
         variant: "destructive",
       });
     } finally {

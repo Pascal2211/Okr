@@ -59,8 +59,8 @@ export function AppSidebar() {
     try {
       await signOut(auth);
       toast.success("You have been signed out.");
-      router.push("/loginn");
-    } catch (error) {
+      router.push("/login");
+    } catch {
       toast.error("An error occurred while signing out.");
     }
   };

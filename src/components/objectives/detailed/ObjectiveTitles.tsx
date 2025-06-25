@@ -2,41 +2,41 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { auth, db } from "@/integrations/firebase/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "@/integrations/firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { BarChart3, User, Users } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
-interface KeyResultCardProps {
-  keyResult: any;
-}
+// interface KeyResultCardProps {
+//   keyResult: unknown;
+// }
 
-const KeyResultCard = ({ keyResult }: KeyResultCardProps) => {
-  return (
-    <Card className="w-full px-4 py-4">
-      <CardHeader>
-        <CardTitle className="text-lg font-semibold">{keyResult.keyResult}</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-2 text-sm text-muted-foreground">
-        <p><span className="font-medium">Explanation:</span> {keyResult.explanation}</p>
-        <div className="flex justify-between">
-          <p><strong>Baseline:</strong> {keyResult.baseline}</p>
-          <p><strong>Current:</strong> {keyResult.current}</p>
-          <p><strong>Target:</strong> {keyResult.target}</p>
-        </div>
-        <p><strong>Owner:</strong> {keyResult.owner}</p>
-        <p><strong>Comment:</strong> {keyResult.comment}</p>
-      </CardContent>
-    </Card>
-  );
-};
+// const KeyResultCard = ({ keyResult }: KeyResultCardProps) => {
+//   return (
+//     <Card className="w-full px-4 py-4">
+//       <CardHeader>
+//         <CardTitle className="text-lg font-semibold">{keyResult.keyResult}</CardTitle>
+//       </CardHeader>
+//       <CardContent className="space-y-2 text-sm text-muted-foreground">
+//         <p><span className="font-medium">Explanation:</span> {keyResult.explanation}</p>
+//         <div className="flex justify-between">
+//           <p><strong>Baseline:</strong> {keyResult.baseline}</p>
+//           <p><strong>Current:</strong> {keyResult.current}</p>
+//           <p><strong>Target:</strong> {keyResult.target}</p>
+//         </div>
+//         <p><strong>Owner:</strong> {keyResult.owner}</p>
+//         <p><strong>Comment:</strong> {keyResult.comment}</p>
+//       </CardContent>
+//     </Card>
+//   );
+// };
 
 export default function ObjectiveTitles() {
   const { id } = useParams();
-  const [objective, setObjective] = useState<any>(null);
+  const [objective, setObjective] = useState<unknown>(null);
   const [loading, setLoading] = useState(true);
-  const user = auth.currentUser;
+
 
   useEffect(() => {
     const fetchObjective = async () => {
@@ -51,14 +51,14 @@ export default function ObjectiveTitles() {
     fetchObjective();
   }, [id]);
 
-  const handleEdit = async (updates: Partial<any>) => {
-    if (!id) return;
-    const ref = doc(db, "objectives", id as string);
-    await updateDoc(ref, {
-      ...updates,
-      updated_at: new Date().toISOString(),
-    });
-  };
+  // const handleEdit = async (updates: Partial<any>) => {
+  //   if (!id) return;
+  //   const ref = doc(db, "objectives", id as string);
+  //   await updateDoc(ref, {
+  //     ...updates,
+  //     updated_at: new Date().toISOString(),
+  //   });
+  // };
 
   if (loading || !objective) {
     return <div className="p-8 text-white">Loading...</div>;

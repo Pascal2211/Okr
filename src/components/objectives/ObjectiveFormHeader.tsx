@@ -9,7 +9,7 @@ interface ObjectiveFormHeaderProps {
     description: string;
     [key: string]: string;
   };
-  setFormData: (formData: any) => void;
+  setFormData: (formData: unknown) => void;
 }
 
 export const ObjectiveFormHeader = ({ formData, setFormData }: ObjectiveFormHeaderProps) => {

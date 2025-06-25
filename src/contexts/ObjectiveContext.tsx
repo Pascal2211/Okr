@@ -23,7 +23,7 @@ export function ObjectiveProvider({
   selectedTeam 
 }: ObjectiveProviderProps) {
   const isTeamTab = activeTab === "teams";
-  const router = useRouter();
+ 
 
   // Debug logging
   useEffect(() => {

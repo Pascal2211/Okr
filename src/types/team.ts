@@ -8,7 +8,7 @@ export type Team = {
   };
   
   export type TeamMember = {
-    userId: any;
+    userId: unknown;
     id: string;
     user_id: string;
     full_name: string;

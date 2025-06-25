@@ -15,7 +15,7 @@ export const useObjectiveRows = (initialObjectiveRows: ObjectiveRow[] = []) => {
     setObjectiveRows(objectiveRows.filter((row) => row.id !== id));
   };
 
-  const handleRowChange = (id: string, field: keyof ObjectiveRow, value: any) => {
+  const handleRowChange = (id: string, field: keyof ObjectiveRow, value: unknown) => {
     setObjectiveRows(
       objectiveRows.map((row) =>
         row.id === id ? { ...row, [field]: value } : row

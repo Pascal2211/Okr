@@ -11,7 +11,7 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   if (isLoading) {
     return (

@@ -3,8 +3,7 @@ import { ObjectivesList } from "./ObjectivesList";
 import { useObjectiveOperations } from "@/hooks/useObjectiveOperations";
 import { EmptyObjectives } from "./EmptyObjectives";
 import { Loader2 } from "lucide-react";
-import { PersonalObjectivesList } from "./PersonalObjectivesList";
-import { TeamObjectivesList } from "./TeamObjectivesList";
+
 
 interface ObjectivesContainerProps {
   teamId?: string | null;

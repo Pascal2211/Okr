@@ -22,7 +22,7 @@ export const useObjectives = () => {
         setIsLoading(true);
         setSelectedTeam(teamId);
 
-        let objectivesData: any[] = [];
+        let objectivesData: unknown[] = [];
 
         if (teamId) {
           // Fetch team objectives using objective_ids from team document
@@ -56,7 +56,7 @@ export const useObjectives = () => {
         }
 
         const processedData = objectivesData.map((obj: any) => {
-          let processed: Objective = {
+          const processed: Objective = {
             ...obj,
             objective_type: obj.objective_type || "standard",
             key_result: obj.key_result || obj.keyResult || "",

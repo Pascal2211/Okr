@@ -7,7 +7,7 @@ interface OwnerSelectorProps {
     owner: string;
     [key: string]: string;
   };
-  setFormData: (formData: any) => void;
+  setFormData: (formData: unknown) => void;
   currentUserFullName: string;
   teamMembers: {id: string, full_name: string}[];
 }

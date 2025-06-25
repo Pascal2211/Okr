@@ -1,6 +1,4 @@
 
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Team } from "@/types/objectives";
 
 interface TeamSelectorProps {

@@ -11,7 +11,7 @@ export const ObjectiveFormSelector = () => {
 
   return (
     <div>
-      <select value={selectedType} onChange={(e) => setSelectedType(e.target.value as any)}>
+      <select value={selectedType} onChange={(e) => setSelectedType(e.target.value as unknown)}>
         <option value="simple">Simple</option>
         <option value="flexible">Flexible</option>
         <option value="advanced">Advanced</option>

@@ -9,8 +9,8 @@ export const useTeamManagement = (
   currentTeam: Team | null,
   setIsActionLoading: (loading: boolean) => void,
   setCurrentTeam: (team: Team | null) => void,
-  setTeamMembers: (members: any[]) => void,
-  setTeamOwner: (owner: any) => void
+  setTeamMembers: (members: unknown[]) => void,
+  setTeamOwner: (owner: unknown) => void
 ) => {
   const { toast } = useToast();
 
@@ -49,11 +49,11 @@ export const useTeamManagement = (
         title: "Team left",
         description: "You have left the team successfully",
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error leaving team:", error);
       toast({
         title: "Error leaving team",
-        description: error.message || "An unexpected error occurred",
+        description: "An unexpected error occurred",
         variant: "destructive",
       });
     } finally {

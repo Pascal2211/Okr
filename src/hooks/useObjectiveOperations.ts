@@ -30,7 +30,7 @@ export const useObjectiveOperations = () => {
       const results = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       console.log("[fetchObjectives] Results:", results);
       return results;
-    } catch (error) {
+    } catch {
       toast({
         title: "Failed to load objectives",
         description: "There was a problem fetching objectives.",

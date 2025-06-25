@@ -17,29 +17,29 @@ export const ObjectivesList = ({ objectives }: ObjectivesListProps) => {
   console.log("ObjectivesList: activeObjectives", activeObjectives);
   console.log("ObjectivesList: completedObjectives", completedObjectives);
 
-  const renderObjectiveCard = (objective: Objective) => {
-    const isTeamObjective = objective.team_id ? true : false;
+  // const renderObjectiveCard = (objective: Objective) => {
+  //   const isTeamObjective = objective.team_id ? true : false;
 
-    const ObjectiveWithBadge = (
-      <div className="w-full h-full">
-        <div className="absolute right-3 top-3 z-10">
-          <Badge 
-            variant="secondary" 
-            className={isTeamObjective ? 
-              "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/80" : 
-              "bg-[#8B5CF6] text-white hover:bg-[#8B5CF6]/80"
-            }
-          >
-            {isTeamObjective ? "Company" : "Personal"}
-          </Badge>
-        </div>
+  //   const ObjectiveWithBadge = (
+  //     <div className="w-full h-full">
+  //       <div className="absolute right-3 top-3 z-10">
+  //         <Badge 
+  //           variant="secondary" 
+  //           className={isTeamObjective ? 
+  //             "bg-[#0EA5E9] text-white hover:bg-[#0EA5E9]/80" : 
+  //             "bg-[#8B5CF6] text-white hover:bg-[#8B5CF6]/80"
+  //           }
+  //         >
+  //           {isTeamObjective ? "Company" : "Personal"}
+  //         </Badge>
+  //       </div>
         
-        {renderObjectiveByType(objective)}
-      </div>
-    );
+  //       {renderObjectiveByType(objective)}
+  //     </div>
+  //   );
 
-    return ObjectiveWithBadge;
-  };
+  //   return ObjectiveWithBadge;
+  // };
 
   const renderObjectiveByType = (objective: Objective) => {
     console.log("Rendering objective type:", objective.type, "for", objective);

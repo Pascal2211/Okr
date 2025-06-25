@@ -47,7 +47,7 @@ export const useObjectivesData = () => {
         const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
         const processedData = data.map((obj: DocumentData) => {
-          let processed: Objective = {
+          const processed: Objective = {
             ...obj,
             objective_type: obj.objective_type || "standard",
             key_result: obj.key_result || obj.keyResult || "",

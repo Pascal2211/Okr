@@ -12,7 +12,7 @@ import { Team } from "@/types/objectives";
 
 export const useTeams = () => {
   const [teams, setTeams] = useState<Team[]>([]);
-  const [userProfile, setUserProfile] = useState<any>(null);
+  const [userProfile, setUserProfile] = useState<unknown>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -47,7 +47,7 @@ export const useTeams = () => {
       console.log("All teams from Firebase:", allTeams);
       
       // Filter teams where the user is a member
-      const userTeams = allTeams.filter((team: any) => {
+      const userTeams = allTeams.filter((team: unknown) => {
         console.log(`Checking team ${team.name}:`, {
           teamId: team.id,
           members: team.members,
@@ -61,7 +61,7 @@ export const useTeams = () => {
       setTeams(userTeams);
       setIsLoading(false);
       return user;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error fetching teams:", error);
       toast({
         title: "Error loading data",

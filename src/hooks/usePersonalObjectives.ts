@@ -5,7 +5,7 @@ import { db, auth } from "@/integrations/firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 export const usePersonalObjectives = () => {
-  const [objectives, setObjectives] = useState<any[]>([]);
+  const [objectives, setObjectives] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
