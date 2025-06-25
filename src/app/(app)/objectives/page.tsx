@@ -16,14 +16,12 @@ import { TeamObjectivesList } from "@/components/objectives/TeamObjectivesList";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ValuesObjectiveCard } from "@/components/objectives/ValuesObjectiveCard";
 import Link from "next/link";
-import { StandardObjectiveCard } from "@/components/objectives/StandardObjectiveCard";
-import { KeyResultsObjectiveCard } from "@/components/objectives/KeyResultsObjectiveCard";
-import { Objective } from "@/types/objectives";
+
 
 const ObjectivesPage = () => {
   const {
     isLoading: objectivesLoading,
-    objectives,
+    
     selectedTeam,
     setSelectedTeam,
     fetchObjectives,
@@ -38,7 +36,7 @@ const ObjectivesPage = () => {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>("personal");
   const [initialFetchDone, setInitialFetchDone] = useState(false);
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  const [setStatusFilter] = useState<string | null>(null);
   const lastFetchedTeamRef = useRef<string | null>(null);
 
   // Debug logging
