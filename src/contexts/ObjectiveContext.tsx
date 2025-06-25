@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useContext, ReactNode, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 interface ObjectiveContextType {
   activeTab: string;

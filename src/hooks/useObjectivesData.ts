@@ -71,11 +71,11 @@ export const useObjectivesData = () => {
         });
 
         setObjectives(processedData);
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Error fetching objectives:", error);
         toast({
           title: "Error loading objectives",
-          description: error.message || "Failed to load objectives",
+          description: "Failed to load objectives",
           variant: "destructive",
         });
       } finally {

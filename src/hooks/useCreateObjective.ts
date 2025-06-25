@@ -9,7 +9,7 @@ export const useCreateObjective = () => {
   const { toast } = useToast();
   const { isTeamTab, selectedTeam } = useObjectiveContext();
 
-  const createObjective = async (data: any) => {
+  const createObjective = async (data: unknown) => {
     try {
       const ref = doc(collection(db, "objectives"));
       
@@ -62,11 +62,11 @@ export const useCreateObjective = () => {
       });
 
       return ref.id;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error creating objective:", error);
       toast({
         title: "Creation failed",
-        description: error.message,
+        description: "Something went wrong when creating a objective",
         variant: "destructive",
       });
     }

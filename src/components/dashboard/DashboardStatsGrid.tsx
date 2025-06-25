@@ -10,7 +10,7 @@ interface DashboardStatsGridProps {
     keyResults: number;
     teamMembers: number;
   };
-  teamInfo: unknown | null;
+  teamInfo: { id: string } | null;
   isTeamView: boolean;
 }
 
@@ -22,12 +22,11 @@ export const DashboardStatsGrid = ({
   const router = useRouter();
 
   const navigateToObjectives = (status?: string) => {
-    const state = {
-      openTeamTab: isTeamView,
-      teamId: teamInfo?.id,
-      filter: status,
-    };
-    router.push("/team");
+    const params = new URLSearchParams();
+    params.set("openTeamTab", String(isTeamView));
+    if (teamInfo && teamInfo.id) params.set("teamId", teamInfo.id);
+    if (status) params.set("filter", status);
+    router.push(`/team?${params.toString()}`);
   };
 
   return (
