@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "@/integrations/firebase/firebase";
 import { useToast } from "./use-toast";
 import { Objective } from "@/types/objectives";
@@ -55,7 +55,8 @@ export const useObjectives = () => {
           objectivesData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         }
 
-        const processedData = objectivesData.map((obj: unknown) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const processedData = objectivesData.map((obj: any) => {
           const processed: Objective = {
             ...obj,
             objective_type: obj.objective_type || "standard",
@@ -94,11 +95,36 @@ export const useObjectives = () => {
     [isLoading, toast]
   );
 
+  // Add toggleObjectiveStatus
+  const toggleObjectiveStatus = async (objective: Objective) => {
+    try {
+      const newStatus = objective.status === "completed" ? "in_progress" : "completed";
+      const objectiveRef = doc(db, "objectives", objective.id);
+      await updateDoc(objectiveRef, { status: newStatus });
+      setObjectives((prev) =>
+        prev.map((obj) =>
+          obj.id === objective.id ? { ...obj, status: newStatus } : obj
+        )
+      );
+      toast({
+        title: "Objective status updated",
+        description: `Objective marked as ${newStatus.replace("_", " ")}`,
+      });
+    } catch {
+      toast({
+        title: "Error updating status",
+        description: "Could not update objective status.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return {
     isLoading,
     objectives,
     selectedTeam,
     setSelectedTeam,
     fetchObjectives,
+    toggleObjectiveStatus,
   };
 };
