@@ -13,9 +13,6 @@ import { useAuth } from "@/hooks/use-auth";
 import { ObjectiveProvider } from "@/contexts/ObjectiveContext";
 import { PersonalObjectivesList } from "@/components/objectives/PersonalObjectivesList";
 import { TeamObjectivesList } from "@/components/objectives/TeamObjectivesList";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ValuesObjectiveCard } from "@/components/objectives/ValuesObjectiveCard";
-import Link from "next/link";
 
 
 const ObjectivesPage = () => {
@@ -36,7 +33,7 @@ const ObjectivesPage = () => {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>("personal");
   const [initialFetchDone, setInitialFetchDone] = useState(false);
-  const [setStatusFilter] = useState<string | null>(null);
+  const [, setStatusFilter] = useState<string | null>(null);
   const lastFetchedTeamRef = useRef<string | null>(null);
 
   // Debug logging
@@ -221,33 +218,4 @@ const ObjectivesPage = () => {
 
 export default ObjectivesPage;
 
-// Company Values List Page (exported at the bottom)
-
-export function CompanyValuesPage() {
-  const { objectives, fetchObjectives, isLoading } = useObjectives();
-  useEffect(() => { fetchObjectives(null); }, [fetchObjectives]);
-  const valuesObjectives = objectives.filter(obj => obj.type === "values");
-  if (isLoading) return <div className="p-8 text-center">Loading...</div>;
-  if (valuesObjectives.length === 0) return <div className="p-8 text-center">No company values found.</div>;
-  // Meta info from the first values objective
-  const meta = valuesObjectives[0];
-  return (
-    <div className="w-full max-w-4xl mx-auto py-10">
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center">{meta.title || "Company Values"}</CardTitle>
-        </CardHeader>
-        <CardContent className="text-center text-lg text-muted-foreground">
-          {meta.description}
-        </CardContent>
-      </Card>
-      <div className="space-y-6">
-        {valuesObjectives.map((obj) => (
-          <Link key={obj.id} href={`/objectives/${obj.id}`} className="block">
-            <ValuesObjectiveCard objective={obj} />
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
+// CompanyValuesPage moved to src/app/(app)/objectives/company-values-page.tsx
