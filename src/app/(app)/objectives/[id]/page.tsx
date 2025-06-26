@@ -119,25 +119,25 @@ export default function ObjectiveDetailPage() {
       <Card className="mb-2">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center flex flex-col sm:flex-row items-center gap-2 justify-center">
-            {objective.title}
+  {objective.title}
             <div className="flex flex-wrap gap-2 justify-center">
-              {objective.status === "in_progress" && (
-                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                  In Progress
-                </span>
-              )}
+  {objective.status === "in_progress" && (
+    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+      In Progress
+    </span>
+  )}
               {objective.status === "completed" && (
                 <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
                   Done
                 </span>
               )}
-              {objective.personalObjective && (
-                <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
-                  Personal
-                </span>
-              )}
+  {objective.personalObjective && (
+    <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
+      Personal
+    </span>
+  )}
             </div>
-          </CardTitle>
+</CardTitle>
         </CardHeader>
         <CardContent className="text-center text-lg text-muted-foreground">
           {objective.description}
@@ -150,7 +150,7 @@ export default function ObjectiveDetailPage() {
         statLabel={objective.type === 'values' ? 'Number of Values' : 'Key Results'}
         statValue={objective.type === 'values' ? (objective.values || []).length : (objective.key_results?.length || 0)}
       />
-    </div>
+              </div>
   );
 
   if (objective.type === 'values') {
@@ -165,10 +165,10 @@ export default function ObjectiveDetailPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-base text-gray-700 whitespace-pre-line">{val.explanation}</div>
-              </CardContent>
-            </Card>
+          </CardContent>
+        </Card>
           ))}
-        </div>
+            </div>
       </div>
     );
   }
@@ -176,11 +176,11 @@ export default function ObjectiveDetailPage() {
   return (
     <div className="w-full max-w-screen-2xl mx-auto py-10 space-y-6">
       {metaAndTitleSection}
-      {/* Key Results */}
-      <div className="flex items-center gap-2 text-gray-900 mb-2">
+              {/* Key Results */}
+        <div className="flex items-center gap-2 text-gray-900 mb-2">
         <h1 className="text-2xl sm:text-3xl font-bold text-white p-2">Key Results
           <Target className="h-5 w-5 text-blue-500 inline-block ml-2" />
-        </h1>
+          </h1>
       </div>
       {objective.key_results && objective.key_results.length > 0 ? (
         <div className="space-y-4">

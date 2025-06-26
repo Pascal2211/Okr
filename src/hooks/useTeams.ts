@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { auth } from "@/integrations/firebase/firebase";
 import { db } from "@/integrations/firebase/firebase";
@@ -16,7 +16,7 @@ export const useTeams = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const fetchTeams = async () => {
+  const fetchTeams = useCallback(async () => {
     try {
       setIsLoading(true);
 
@@ -47,14 +47,14 @@ export const useTeams = () => {
       console.log("All teams from Firebase:", allTeams);
       
       // Filter teams where the user is a member
-      const userTeams = allTeams.filter((team: unknown) => {
+      const userTeams = allTeams.filter((team: { id: string; name?: string; code?: string; members?: string[] }) => {
         console.log(`Checking team ${team.name}:`, {
           teamId: team.id,
           members: team.members,
           userInMembers: team.members && team.members.includes(user.uid)
         });
         return team.members && team.members.includes(user.uid);
-      });
+      }) as Team[];
 
       console.log("User teams after filtering:", userTeams);
 
@@ -63,15 +63,16 @@ export const useTeams = () => {
       return user;
     } catch (error: unknown) {
       console.error("Error fetching teams:", error);
+      const errorMessage = error instanceof Error ? error.message : "Failed to load your teams";
       toast({
         title: "Error loading data",
-        description: error.message || "Failed to load your teams",
+        description: errorMessage,
         variant: "destructive",
       });
       setIsLoading(false);
       return null;
     }
-  };
+  }, [toast]);
 
   // Listen for auth state changes
   useEffect(() => {
@@ -87,7 +88,7 @@ export const useTeams = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [fetchTeams]);
 
   return {
     teams,

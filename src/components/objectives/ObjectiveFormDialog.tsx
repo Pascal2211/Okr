@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Team, KeyResult, Value, ObjectiveRow } from "@/types/objectives";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -86,6 +85,16 @@ export const ObjectiveFormDialog = ({
     onOpenChange(false);
   };
 
+  // Create a wrapper function that adapts the type for ObjectiveFormHeader
+  const handleFormDataChange = (newFormData: unknown) => {
+    setFormData(newFormData as typeof formData);
+  };
+
+  // Create a wrapper function that adapts the type for OwnerSelector
+  const handleOwnerFormDataChange = (newFormData: unknown) => {
+    setFormData(newFormData as typeof formData);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl" aria-describedby="Objective-dialog-description">
@@ -103,7 +112,7 @@ export const ObjectiveFormDialog = ({
             
             <ObjectiveFormHeader 
               formData={formData} 
-              setFormData={setFormData} 
+              setFormData={handleFormDataChange} 
             />
             
             {objectiveType === "standard" && (
@@ -116,7 +125,7 @@ export const ObjectiveFormDialog = ({
                 {/* Owner selection field */}
                 <OwnerSelector
                   formData={formData}
-                  setFormData={setFormData}
+                  setFormData={handleOwnerFormDataChange}
                   currentUserFullName={currentUserFullName}
                   teamMembers={selectedTeam ? teamMembers : []}
                 />

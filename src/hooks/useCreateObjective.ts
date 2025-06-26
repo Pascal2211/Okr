@@ -4,12 +4,13 @@ import { db } from "@/integrations/firebase/firebase";
 import { doc, collection, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 import { useObjectiveContext } from "@/contexts/ObjectiveContext";
+import { Objective } from "@/types/objectives";
 
 export const useCreateObjective = () => {
   const { toast } = useToast();
   const { isTeamTab, selectedTeam } = useObjectiveContext();
 
-  const createObjective = async (data: unknown) => {
+  const createObjective = async (data: Partial<Objective>) => {
     try {
       const ref = doc(collection(db, "objectives"));
       

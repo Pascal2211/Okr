@@ -7,6 +7,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { BarChart3 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Objective } from "@/types/objectives";
 
 // interface KeyResultCardProps {
 //   keyResult: unknown;
@@ -34,7 +35,7 @@ import { Progress } from "@/components/ui/progress";
 
 export default function ObjectiveTitles() {
   const { id } = useParams();
-  const [objective, setObjective] = useState<unknown>(null);
+  const [objective, setObjective] = useState<Objective | null>(null);
   const [loading, setLoading] = useState(true);
 
 
@@ -43,7 +44,7 @@ export default function ObjectiveTitles() {
       const ref = doc(db, "objectives", id as string);
       const snapshot = await getDoc(ref);
       if (snapshot.exists()) {
-        setObjective(snapshot.data());
+        setObjective({ id: snapshot.id, ...snapshot.data() } as Objective);
       }
       setLoading(false);
     };

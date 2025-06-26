@@ -3,7 +3,7 @@ import { ObjectivesList } from "./ObjectivesList";
 import { useObjectiveOperations } from "@/hooks/useObjectiveOperations";
 import { EmptyObjectives } from "./EmptyObjectives";
 import { Loader2 } from "lucide-react";
-
+import { Objective } from "@/types/objectives";
 
 interface ObjectivesContainerProps {
   teamId?: string | null;
@@ -11,7 +11,7 @@ interface ObjectivesContainerProps {
 
 export const ObjectivesContainer = ({ teamId }: ObjectivesContainerProps) => {
   const { fetchObjectives } = useObjectiveOperations();
-  const [objectives, setObjectives] = useState([]);
+  const [objectives, setObjectives] = useState<Objective[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,12 +19,17 @@ export const ObjectivesContainer = ({ teamId }: ObjectivesContainerProps) => {
       setLoading(true);
       console.log("[ObjectiveContainer] teamId:", teamId);
       const data = await fetchObjectives(teamId ?? null);
-      setObjectives(data)
+      setObjectives(data);
       setLoading(false);
       console.log("[ObjectiveContainer] objectives fetched:", data);
     };
     loadObjectives();
-  }, [teamId]);
+  }, [teamId, fetchObjectives]);
+
+  const handleCreateClick = () => {
+    // Placeholder function - you can implement navigation to create objective page
+    console.log("Create objective clicked");
+  };
 
   if (loading) {
     return (
@@ -38,6 +43,9 @@ export const ObjectivesContainer = ({ teamId }: ObjectivesContainerProps) => {
   return objectives.length > 0 ? (
     <ObjectivesList objectives={objectives} />
   ) : (
-    <EmptyObjectives />
+    <EmptyObjectives 
+      type={teamId ? "team" : "personal"} 
+      onCreateClick={handleCreateClick} 
+    />
   );
 };

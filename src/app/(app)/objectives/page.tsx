@@ -119,7 +119,7 @@ const ObjectivesPage = () => {
       }
       
       if (teams.length > 0) {
-        const selected = selectedTeam || teams[0].id;
+      const selected = selectedTeam || teams[0].id;
         console.log("Setting team for tab change:", selected);
         setSelectedTeam(selected);
         
@@ -176,42 +176,42 @@ const ObjectivesPage = () => {
 
   return (
     <ObjectiveProvider activeTab={activeTab} selectedTeam={selectedTeam}>
-      <div className="max-w-screen-2xl mx-auto w-full px-6 space-y-6 min-h-screen">
-        <div className="flex justify-between items-center">
-          <ObjectivesHeader />
-        </div>
+    <div className="max-w-screen-2xl mx-auto w-full px-6 space-y-6 min-h-screen">
+      <div className="flex justify-between items-center">
+        <ObjectivesHeader />
+      </div>
 
-        {isLoading ? (
-          <div className="flex justify-center p-12">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          </div>
-        ) : (
-          <div className="space-y-6">
-            <Tabs
-              value={activeTab}
-              onValueChange={handleTabChange}
-              className="w-full"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <TabsList className="grid w-full md:w-auto grid-cols-2 md:inline-flex">
-                  <TabsTrigger value="personal">Personal Objectives</TabsTrigger>
-                  <TabsTrigger value="teams">Team Objectives</TabsTrigger>
-                </TabsList>
+      {isLoading ? (
+        <div className="flex justify-center p-12">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      ) : (
+        <div className="space-y-6">
+          <Tabs
+            value={activeTab}
+            onValueChange={handleTabChange}
+            className="w-full"
+          >
+            <div className="flex justify-between items-center mb-4">
+              <TabsList className="grid w-full md:w-auto grid-cols-2 md:inline-flex">
+                <TabsTrigger value="personal">Personal Objectives</TabsTrigger>
+                <TabsTrigger value="teams">Team Objectives</TabsTrigger>
+              </TabsList>
 
                 <ObjectiveCreator />
-              </div>
+            </div>
 
               <TabsContent value="personal">
                 <PersonalObjectivesList />
-              </TabsContent>
+            </TabsContent>
 
               <TabsContent value="teams">
                 {selectedTeam && <TeamObjectivesList teamId={selectedTeam} />}
-              </TabsContent>
-            </Tabs>
-          </div>
-        )}
-      </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      )}
+    </div>
     </ObjectiveProvider>
   );
 };

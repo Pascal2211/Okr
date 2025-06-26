@@ -4,11 +4,12 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db, auth } from "@/integrations/firebase/firebase";
 import { useToast } from "@/hooks/use-toast";
+import { Objective } from "@/types/objectives";
 
 export const useObjectiveOperations = () => {
   const { toast } = useToast();
 
-  const fetchObjectives = async (teamId?: string | null) => {
+  const fetchObjectives = async (teamId?: string | null): Promise<Objective[]> => {
     try {
       const user = auth.currentUser;
       if (!user) return [];
@@ -29,7 +30,34 @@ export const useObjectiveOperations = () => {
       const snapshot = await getDocs(q);
       const results = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       console.log("[fetchObjectives] Results:", results);
-      return results;
+      
+      // Process the results to match Objective type
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const processedResults = results.map((obj: any) => {
+        const processed: Objective = {
+          ...obj,
+          objective_type: obj.objective_type || "standard",
+          key_result: obj.key_result || obj.keyResult || "",
+        };
+
+        try {
+          if (typeof obj.key_results === "string") {
+            processed.key_results = JSON.parse(obj.key_results);
+          }
+          if (typeof obj.objective_rows === "string") {
+            processed.objective_rows = JSON.parse(obj.objective_rows);
+          }
+          if (typeof obj.values === "string") {
+            processed.values = JSON.parse(obj.values);
+          }
+        } catch (e) {
+          console.warn("JSON parse error", e);
+        }
+
+        return processed;
+      });
+
+      return processedResults;
     } catch {
       toast({
         title: "Failed to load objectives",

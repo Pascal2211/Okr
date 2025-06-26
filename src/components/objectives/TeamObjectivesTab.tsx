@@ -67,32 +67,32 @@ export function TeamObjectivesTab({
         </Select>
 
         <div className="flex gap-2">
-          <Button 
-            variant={!statusFilter ? "default" : "outline"} 
-            size="sm"
-            onClick={() => setStatusFilter(null)}
+              <Button
+                variant={!statusFilter ? "default" : "outline"}
+                size="sm"
+                onClick={() => setStatusFilter(null)}
             className={!statusFilter ? "bg-black text-white hover:bg-[#0000]/90 hover:text-white" : "text-black hover:bg-[#0EA5E9]/10 hover:text-white"}
-          >
-            All
-          </Button>
-          <Button 
+              >
+                All
+              </Button>
+              <Button
             variant={statusFilter === 'active' ? "default" : "outline"} 
-            size="sm"
+                size="sm"
             onClick={() => setStatusFilter('active')}
             className={statusFilter === 'active' ? "bg-black text-white hover:bg-[#0000]/90 hover:text-white" : "text-black hover:bg-[#0EA5E9]/10 hover:text-white"}
-          >
-            <Circle className="mr-1 h-3 w-3" /> Active
-          </Button>
-          <Button 
+              >
+                <Circle className="mr-1 h-3 w-3" /> Active
+              </Button>
+              <Button
             variant={statusFilter === 'completed' ? "default" : "outline"} 
-            size="sm"
+                size="sm"
             onClick={() => setStatusFilter('completed')}
             className={statusFilter === 'completed' ? "bg-black text-white hover:bg-[#0000]/90 hover:text-white" : "text-black hover:bg-[#0EA5E9]/10 hover:text-white"}
-          >
-            <CheckCircle className="mr-1 h-3 w-3" /> Completed
-          </Button>
-        </div>
-      </div>
+              >
+                <CheckCircle className="mr-1 h-3 w-3" /> Completed
+              </Button>
+            </div>
+          </div>
 
       {selectedTeam && (
         <div className="flex justify-end">
@@ -100,14 +100,14 @@ export function TeamObjectivesTab({
         </div>
       )}
 
-      {objectives.length === 0 ? (
+            {objectives.length === 0 ? (
         <EmptyObjectives 
           type="team" 
           onCreateClick={onCreateClick} 
         />
-      ) : (
-        <ObjectivesList objectives={objectives} />
-      )}
-    </div>
+            ) : (
+              <ObjectivesList objectives={objectives} />
+            )}
+              </div>
   );
 }

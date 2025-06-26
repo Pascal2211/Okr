@@ -47,11 +47,11 @@ export const useObjectivesData = () => {
         const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
         const processedData = data.map((obj: DocumentData) => {
-          const processed: Objective = {
+          const processed = {
             ...obj,
-            objective_type: obj.objective_type || "standard",
-            key_result: obj.key_result || obj.keyResult || "",
-          };
+            type: obj.type || obj.objective_type || "standard",
+            keyResult: obj.keyResult || obj.key_result || "",
+          } as Objective;
 
           try {
             if (typeof obj.key_results === "string") {

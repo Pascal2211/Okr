@@ -36,18 +36,18 @@ export const StandardObjectiveCard = ({ objective }: StandardObjectiveCardProps)
             const kr = objective.key_results[0];
             return (
               <div className="space-y-1">
-                <div className="space-y-1">
+          <div className="space-y-1">
                   <span>Key Result {kr.title}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <p><strong>Baseline:</strong>{kr.baseline}</p>
-                  <p><strong>Current:</strong> {kr.current}</p>
-                  <p><strong>Target:</strong> {kr.target}</p>
-                </div>
-              </div>
+          </div>
+          <div className="flex justify-between text-sm">
+            <p><strong>Baseline:</strong>{kr.baseline}</p>
+            <p><strong>Current:</strong> {kr.current}</p>
+            <p><strong>Target:</strong> {kr.target}</p>
+          </div>
+        </div>
             );
           })()
-        )}
+  )}
         
         <div className="w-full bg-secondary h-2 rounded-full overflow-hidden">
           <div 
