@@ -27,10 +27,15 @@ export const ValuesObjectiveForm = ({ onSuccess }: { onSuccess: () => void }) =>
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const valuesWithIds = values.map((value, index) => ({
+      ...value,
+      id: `value-${index}`,
+    }));
+    
     await createObjective({
       type: "values",
       title,
-      values,
+      values: valuesWithIds,
       personalObjective: true,
       user_id: user?.uid,
     });

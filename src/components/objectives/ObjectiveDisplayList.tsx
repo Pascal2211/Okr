@@ -1,20 +1,15 @@
 "use client";
 
+import { useEffect } from "react";
 import { useObjectives } from "@/hooks/useObjectives";
-import { ObjectiveCard } from "./ObjectiveCard";
+import { ObjectivesList } from "./ObjectivesList";
 
 export const ObjectiveDisplayList = () => {
   const { objectives, fetchObjectives } = useObjectives();
 
   useEffect(() => {
-    fetchObjectives();
-  }, []);
+    fetchObjectives(null);
+  }, [fetchObjectives]);
 
-  return (
-    <div>
-      {objectives.map((obj) => (
-        <ObjectiveCard key={obj.id} objective={obj} />
-      ))}
-    </div>
-  );
+  return <ObjectivesList objectives={objectives} />;
 };

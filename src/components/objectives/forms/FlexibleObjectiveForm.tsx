@@ -17,12 +17,12 @@ export const FlexibleObjectiveForm = ({ onSuccess }: { onSuccess: () => void }) 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await createObjective({
-      objective_type: "standard",
+      type: "key_results",
       title,
       description,
-      baseline,
-      target,
-      current,
+      baseline: baseline ? parseFloat(baseline) : null,
+      target: target ? parseFloat(target) : undefined,
+      current: current ? parseFloat(current) : null,
       personalObjective: true,
       user_id: user?.uid,
     });

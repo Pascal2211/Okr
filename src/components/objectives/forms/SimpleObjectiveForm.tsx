@@ -8,8 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { useCreateObjective } from "@/hooks/useCreateObjective";
 import { auth } from "@/integrations/firebase/firebase";
 import { useObjectiveContext } from "@/contexts/ObjectiveContext";
+import { KeyResult } from "@/types/objectives";
 
-interface KeyResult {
+interface FormKeyResult {
   name: string;
   keyResult: string;
   explanation: string;
@@ -28,12 +29,25 @@ export const SimpleObjectiveForm = ({
   isSubmitting = false,
   onSuccess,
 }: SimpleObjectiveFormProps) => {
+  const { createObjective } = useCreateObjective();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [owner, setOwner] = useState("");
   const [comment, setComment] = useState("");
-  const [keyResults, setKeyResults] = useState<KeyResult[]>([
-    {
+  const [keyResults, setKeyResults] = useState<FormKeyResult[]>([{
+    name: "",
+    keyResult: "",
+    explanation: "",
+    baseline: "",
+    current: "",
+    target: "",
+    owner: "",
+  }]);
+
+  const { isTeamTab } = useObjectiveContext();
+
+  const handleAddKeyResult = () => {
+    setKeyResults([...keyResults, {
       name: "",
       keyResult: "",
       explanation: "",
@@ -41,30 +55,12 @@ export const SimpleObjectiveForm = ({
       current: "",
       target: "",
       owner: "",
-    },
-  ]);
-
-  const { createObjective } = useCreateObjective();
-  const { isTeamTab } = useObjectiveContext();
-
-  const handleAddKeyResult = () => {
-    setKeyResults([
-      ...keyResults,
-      {
-        name: "",
-        keyResult: "",
-        explanation: "",
-        baseline: "",
-        current: "",
-        target: "",
-        owner: "",
-      },
-    ]);
+    }]);
   };
 
   const handleKeyResultChange = (
     index: number,
-    field: keyof KeyResult,
+    field: keyof FormKeyResult,
     value: string
   ) => {
     const updated = [...keyResults];
@@ -76,13 +72,25 @@ export const SimpleObjectiveForm = ({
     e.preventDefault();
     const user = auth.currentUser;
 
+    // Convert form KeyResults to the expected KeyResult type
+    const convertedKeyResults: KeyResult[] = keyResults.map((kr, index) => ({
+      id: `kr-${index}`,
+      title: kr.name,
+      baseline: kr.baseline ? parseFloat(kr.baseline) : null,
+      current: kr.current ? parseFloat(kr.current) : null,
+      target: kr.target ? parseFloat(kr.target) : null,
+      comment: kr.keyResult,
+      owner: kr.owner,
+      explanation: kr.explanation,
+    }));
+
     const payload = {
       title,
       description,
       owner,
       comment,
-      type: "standard",
-      key_results: keyResults,
+      type: "standard" as const,
+      key_results: convertedKeyResults,
       user_id: user?.uid,
     };
 

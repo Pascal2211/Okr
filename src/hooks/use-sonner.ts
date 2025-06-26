@@ -45,7 +45,7 @@ function toast({
 
   const update = (props: ToastProps) => {
     // Fake update: just toast again with same ID
-    toast({ ...props, id: toastId })
+    toast({ ...props, id: String(toastId) })
   }
 
   return {

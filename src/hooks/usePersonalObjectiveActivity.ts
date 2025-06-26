@@ -29,8 +29,9 @@ export const usePersonalObjectiveActivity = () => {
               type: change.type as "created" | "deleted" | "updated",
               title: data.title,
               timestamp:
-                change.doc.updateTime?.toDate().toLocaleString() ||
-                new Date().toLocaleString(),
+                change.doc.metadata.hasPendingWrites 
+                  ? new Date().toLocaleString()
+                  : new Date().toLocaleString(),
             };
           }
         })

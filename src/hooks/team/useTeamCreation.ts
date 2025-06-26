@@ -2,8 +2,16 @@ import { useToast } from "@/hooks/use-toast";
 import { db, auth } from "@/integrations/firebase/firebase";
 import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import { Team, TeamMember } from "@/types/team";
 
-export const useTeamCreation = (setters) => {
+interface TeamSetters {
+  setIsActionLoading: (loading: boolean) => void;
+  setCurrentTeam: (team: Team | null) => void;
+  setTeamMembers: (members: TeamMember[]) => void;
+  setTeamOwner: (owner: TeamMember | null) => void;
+}
+
+export const useTeamCreation = (setters: TeamSetters) => {
   const { toast } = useToast();
 
   const createTeam = async (teamName: string) => {
@@ -40,8 +48,17 @@ export const useTeamCreation = (setters) => {
 
       // 4. Update local state
       setters.setCurrentTeam(newTeam);
-      setters.setTeamMembers([userProfile]);
-      setters.setTeamOwner(userProfile);
+      if (userProfile) {
+        const teamMember: TeamMember = {
+          userId: user.uid,
+          id: user.uid,
+          user_id: user.uid,
+          full_name: `${userProfile.firstName || ''} ${userProfile.lastName || ''}`.trim(),
+          team_id: teamId,
+        };
+        setters.setTeamMembers([teamMember]);
+        setters.setTeamOwner(teamMember);
+      }
 
       toast({
         title: "Team created",
