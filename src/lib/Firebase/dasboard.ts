@@ -12,12 +12,12 @@ export async function getDashboardData(teamId?: string | null) {
 
     // Example query: Fetch objectives where owner is the user
     const q = teamId
-      ? query(collection(db, "objectives"), where("team_id", "==", teamId))
-      : query(
-          collection(db, "objectives"),
-          where("personalObjective", "==", true),
-          where("user_id", "==", user.uid)
-        );
+  ? query(collection(db, "objectives"), where("team_id", "==", teamId))
+  : query(
+      collection(db, "objectives"),
+      where("personalObjective", "==", true),
+      where("user_id", "==", user.uid)
+    );
     const snapshot = await getDocs(q);
 
     const objectives = snapshot.docs.map(doc => ({

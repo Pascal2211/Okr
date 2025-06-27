@@ -124,7 +124,7 @@ const ObjectivesPageContent = () => {
         // Only fetch if we haven't already fetched for this team
         if (lastFetchedTeamRef.current !== selected) {
           lastFetchedTeamRef.current = selected;
-          await fetchObjectives(selected);
+      await fetchObjectives(selected);
         } else {
           console.log("Already fetched objectives for team:", selected);
         }
@@ -132,7 +132,7 @@ const ObjectivesPageContent = () => {
         console.log("No teams available for user");
         lastFetchedTeamRef.current = null;
         await fetchObjectives(null);
-      }
+    }
     }
   };
 
@@ -140,7 +140,7 @@ const ObjectivesPageContent = () => {
 
   return (
     <ObjectiveProvider activeTab={activeTab} selectedTeam={selectedTeam}>
-    <div className="max-w-screen-2xl mx-auto w-full px-6 space-y-6 min-h-screen">
+    <div className="w-full max-w-screen-2xl ml-4 mr-2 py-6 space-y-6">
       <div className="flex justify-between items-center">
         <ObjectivesHeader />
       </div>

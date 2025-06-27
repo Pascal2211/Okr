@@ -35,19 +35,6 @@ export const SimpleObjectiveForm = ({
   const [owner, setOwner] = useState("");
   const [comment, setComment] = useState("");
   const [keyResults, setKeyResults] = useState<FormKeyResult[]>([{
-    name: "",
-    keyResult: "",
-    explanation: "",
-    baseline: "",
-    current: "",
-    target: "",
-    owner: "",
-  }]);
-
-  const { isTeamTab } = useObjectiveContext();
-
-  const handleAddKeyResult = () => {
-    setKeyResults([...keyResults, {
       name: "",
       keyResult: "",
       explanation: "",
@@ -55,6 +42,19 @@ export const SimpleObjectiveForm = ({
       current: "",
       target: "",
       owner: "",
+  }]);
+
+  const { isTeamTab } = useObjectiveContext();
+
+  const handleAddKeyResult = () => {
+    setKeyResults([...keyResults, {
+        name: "",
+        keyResult: "",
+        explanation: "",
+        baseline: "",
+        current: "",
+        target: "",
+        owner: "",
     }]);
   };
 
@@ -82,6 +82,7 @@ export const SimpleObjectiveForm = ({
       comment: kr.keyResult,
       owner: kr.owner,
       explanation: kr.explanation,
+      keyResult: kr.keyResult,
     }));
 
     const payload = {

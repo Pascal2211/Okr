@@ -48,7 +48,7 @@ const KeyResultCard = ({ keyResult }: KeyResultCardProps) => {
     <Card className="w-full px-4 py-4 bg-white shadow-md rounded-xl border border-gray-200">
       <CardHeader>
         <CardTitle className="text-lg font-semibold text-black">
-          {keyResult.title}
+          {keyResult.keyResult}
         </CardTitle>
       </CardHeader>
       <CardContent className="text-sm text-muted-foreground space-y-2">

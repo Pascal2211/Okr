@@ -13,6 +13,7 @@ export interface Team {
     comment: string;
     owner: string;
     explanation?: string;
+    keyResult: string;
   }
   
   export interface Value {
