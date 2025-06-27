@@ -1,7 +1,7 @@
 // FILE: src/app/objectives/page.tsx
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
@@ -14,11 +14,9 @@ import { ObjectiveProvider } from "@/contexts/ObjectiveContext";
 import { PersonalObjectivesList } from "@/components/objectives/PersonalObjectivesList";
 import { TeamObjectivesList } from "@/components/objectives/TeamObjectivesList";
 
-
-const ObjectivesPage = () => {
+const ObjectivesPageContent = () => {
   const {
     isLoading: objectivesLoading,
-    
     selectedTeam,
     setSelectedTeam,
     fetchObjectives,
@@ -138,41 +136,7 @@ const ObjectivesPage = () => {
     }
   };
 
-  // const getFilteredObjectives = () => {
-  //   let filtered = objectives;
-
-  //   if (activeTab === "personal" && user) {
-  //     filtered = filtered.filter(
-  //       (obj) => obj.personalObjective === true && obj.user_id === user.uid
-  //     );
-  //   } else if (activeTab === "teams") {
-  //     filtered = filtered.filter((obj) => obj.personalObjective === false);
-  //   }
-
-  //   if (statusFilter) {
-  //     if (statusFilter === "active") {
-  //       filtered = filtered.filter((obj) => obj.status !== "completed");
-  //     } else if (statusFilter === "completed") {
-  //       filtered = filtered.filter((obj) => obj.status === "completed");
-  //     }
-  //   }
-
-  //   return filtered;
-  // };
-
   const isLoading = objectivesLoading || teamsLoading;
-
-  // const renderObjectiveByType = (objective: Objective) => {
-  //   switch(objective.type) {
-  //     case "standard":
-  //       console.log("Rendering StandardObjectiveCard");
-  //       return <StandardObjectiveCard objective={objective} />;
-  //     case "key_results":
-  //       console.log("Rendering KeyResultsObjectiveCard");
-  //       return <KeyResultsObjectiveCard objective={objective} />;
-  //     // ...
-  //   }
-  // };
 
   return (
     <ObjectiveProvider activeTab={activeTab} selectedTeam={selectedTeam}>
@@ -198,21 +162,33 @@ const ObjectivesPage = () => {
                 <TabsTrigger value="teams">Team Objectives</TabsTrigger>
               </TabsList>
 
-                <ObjectiveCreator />
+              <ObjectiveCreator />
             </div>
 
-              <TabsContent value="personal">
-                <PersonalObjectivesList />
+            <TabsContent value="personal" className="space-y-4">
+              <PersonalObjectivesList />
             </TabsContent>
 
-              <TabsContent value="teams">
-                {selectedTeam && <TeamObjectivesList teamId={selectedTeam} />}
+            <TabsContent value="teams" className="space-y-4">
+              {selectedTeam && <TeamObjectivesList teamId={selectedTeam} />}
             </TabsContent>
           </Tabs>
         </div>
       )}
     </div>
     </ObjectiveProvider>
+  );
+};
+
+const ObjectivesPage = () => {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center p-12">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    }>
+      <ObjectivesPageContent />
+    </Suspense>
   );
 };
 
