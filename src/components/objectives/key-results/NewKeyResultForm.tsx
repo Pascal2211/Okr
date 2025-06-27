@@ -21,6 +21,7 @@ export const NewKeyResultForm = ({ onAdd, teamMembers = [] }: NewKeyResultFormPr
     target: null,
     comment: "",
     owner: "",
+    keyResult: "",
   });
 
   const handleAddKeyResult = () => {
@@ -35,6 +36,7 @@ export const NewKeyResultForm = ({ onAdd, teamMembers = [] }: NewKeyResultFormPr
       target: null,
       comment: "",
       owner: "",
+      keyResult: ""
     });
   };
 
