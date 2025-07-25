@@ -1,37 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎯 OKR Dashboard – Objective & Key Results Platform
 
-## Getting Started
+Welcome to the **OKR Dashboard**, a modern and intuitive platform built to help individuals and teams track progress, stay aligned, and crush goals. Built with **Next.js**, **TypeScript**, **Firebase**, and **shadcn/ui**, this application delivers a seamless experience from authentication to objective creation and completion.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔐 Authentication First
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Start your journey by securely **signing in or registering** using Firebase Authentication. The app supports:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Email/password login
+- Secure Firebase-based session management
+- Protected routes with role-based UI access
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧭 Your Dashboard Overview
 
-To learn more about Next.js, take a look at the following resources:
+Once logged in, you're greeted with a clean, minimalistic **dashboard** that offers quick insights into your OKR performance:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ✅ **Total Objectives** & **Completed Objectives**
+- 📊 **Progress Statistics** (visual indicator of completion rate)
+- 🕒 **Recent Activity Feed** – Tracks every modification in real time
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🎯 Objectives Management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Navigate to the **Objectives Page** where you can toggle between:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Okr
+- 👤 **Personal Objectives**
+- 👥 **Team Objectives**
+
+Each objective is displayed with key details, and users can:
+
+- Create new objectives using the `+ Create Objective` button
+- Choose between multiple types: *Simple*, *Flexible*, *Advanced*, *Company Values*
+- View and edit progress (Key Results, comments, targets)
+
+---
+
+## 🧑‍🤝‍🧑 Team Collaboration
+
+The **Team Page** is your space for collaboration:
+
+- 🆕 If no team: Prompted to join or create one
+- 👥 If part of a team:
+  - View team member count
+  - Shareable **team invitation code**
+  - Overview of current **team objectives**
+
+Everything is synced with Firebase for real-time updates.
+
+---
+
+## 🧱 Tech Stack
+
+| Tech          | Purpose                                |
+|---------------|----------------------------------------|
+| **Next.js**   | App framework (SSR/ISR/SPA)            |
+| **TypeScript**| Type-safe modern development           |
+| **Firebase**  | Auth, Firestore DB, real-time data     |
+| **shadcn/ui** | Headless, accessible UI components     |
+| **TailwindCSS**| Utility-first styling                 |
+| **Component-based** | Modular and scalable architecture|
+
+---
+
+## ✨ Features
+
+- 🎨 Clean UI with responsive design
+- 🔄 Real-time updates on dashboard and objectives
+- 🧩 Objective types for different needs
+- 📈 Visual feedback on progress
+- 🛡️ Role-aware UI (personal vs. team objectives)
+- 💾 Firebase Firestore as the scalable backend
+
+---
+
+## 📁 Folder Structure (Simplified)
