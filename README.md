@@ -78,3 +78,35 @@ Everything is synced with Firebase for real-time updates.
 ---
 
 ## 📁 Folder Structure (Simplified)
+- /components
+- /dashboard
+- /objectives
+- /team
+- /auth
+- /hooks
+- /pages
+- /dashboard
+- /objectives
+- /team
+- /lib
+- /types
+
+---
+
+## 🚀 Getting Started
+
+bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Environment Variables (.env.local)
+NEXT_PUBLIC_FIREBASE_API_KEY=your_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+
+## 📄 License
+---
+Would you like me to turn this into a downloadable file or help you plug in screenshots, GitHub links, or a portfolio section?
